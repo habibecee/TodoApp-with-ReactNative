@@ -12,6 +12,7 @@ import GeneralStyles from './src/utils/generalStyles';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Input from './src/components/input';
 import {colors} from './src/utils/constants';
+import ToDo from './src/components/todo';
 
 function App() {
   const [text, setText] = useState('');
@@ -33,8 +34,8 @@ function App() {
     <SafeAreaView style={[GeneralStyles.flex1, GeneralStyles.bgWhite]}>
       <Header title="My Todo App" />
       <Input
-        color={colors.textSecondary}
-        iconName="pluscircle"
+        color={colors.inputBorder}
+        iconName="paw-sharp"
         hasIcon={true}
         value={text}
         onChangeText={text => setText(text)}
@@ -46,7 +47,9 @@ function App() {
           <Text style={styles.emptyText}> No goals here yet! </Text>
         ) : (
           <ScrollView style={styles.scrollView}>
-            <Text style={styles.emptyText}> TODO DİZİSİ </Text>
+            {todos?.map((todo, index) => (
+              <ToDo key={index} todo={todo} index={index + 1} />
+            ))}
           </ScrollView>
         )}
       </View>
@@ -59,14 +62,13 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 20,
     marginVertical: 30,
-    borderWidth: 1,
   },
 
   emptyText: {
     textAlign: 'center',
     fontSize: 20,
     fontWeight: 'bold',
-    color: colors.textSecondary,
+    color: colors.textSpecial,
   },
 
   scrollView: {

@@ -25,6 +25,14 @@ const GeneralStyles = StyleSheet.create({
   bgWhite: {
     backgroundColor: colors.white,
   },
+
+  opacityFull: {
+    opacity: 1,
+  },
+  opacityLess: {
+    opacity: 0.5,
+    backgroundColor: '#EEEEEE',
+  },
 });
 
 export default GeneralStyles;

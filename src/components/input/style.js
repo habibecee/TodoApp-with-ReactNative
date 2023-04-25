@@ -10,12 +10,12 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    borderWidth: 1,
+    borderWidth: 3,
     borderColor: colors.inputBorder,
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 5,
-    color: colors.textPrimary,
+    color: colors.inputBorder,
     fontSize: 16,
     flex: 1,
   },
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   icon: {
     fontSize: 30,
     // color: colors.bgPrimary,
-    marginLeft: -35,
+    marginLeft: -40,
   },
 });
 
