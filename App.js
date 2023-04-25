@@ -1,18 +1,77 @@
-import React from 'react';
-import {SafeAreaView, Text, View} from 'react-native';
+import React, {useState} from 'react';
+import {
+  Alert,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import Header from './src/components/header';
 import GeneralStyles from './src/utils/generalStyles';
 import Icon from 'react-native-vector-icons/AntDesign';
+import Input from './src/components/input';
+import {colors} from './src/utils/constants';
+
 function App() {
+  const [text, setText] = useState('');
+  const [todos, setTodos] = useState([]);
+
+  const addTodo = () => {
+    const newTodo = {
+      id: String(new Date().getTime()),
+      text: text,
+      date: new Date(),
+      completed: false,
+    };
+
+    setTodos([...todos, newTodo]);
+    setText('');
+  };
+
   return (
-    <SafeAreaView style={GeneralStyles.flex1}>
+    <SafeAreaView style={[GeneralStyles.flex1, GeneralStyles.bgWhite]}>
       <Header title="My Todo App" />
-      <View>
-        <Text> TODO APP WEEK 1</Text>
-        <Icon name="pluscircle" size={25} color="red" />
+      <Input
+        color={colors.textSecondary}
+        iconName="pluscircle"
+        hasIcon={true}
+        value={text}
+        onChangeText={text => setText(text)}
+        placeholder="Enter your goals"
+        onIconPress={addTodo}
+      />
+      <View style={styles.todosWrapper}>
+        {todos.length === 0 ? (
+          <Text style={styles.emptyText}> No goals here yet! </Text>
+        ) : (
+          <ScrollView style={styles.scrollView}>
+            <Text style={styles.emptyText}> TODO DİZİSİ </Text>
+          </ScrollView>
+        )}
       </View>
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  todosWrapper: {
+    flex: 1,
+    marginHorizontal: 20,
+    marginVertical: 30,
+    borderWidth: 1,
+  },
+
+  emptyText: {
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: colors.textSecondary,
+  },
+
+  scrollView: {
+    flexGrow: 1,
+  },
+});
 
 export default App;
