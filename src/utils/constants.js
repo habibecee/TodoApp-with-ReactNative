@@ -8,9 +8,10 @@ export const colors = {
   borderColor: '#E5E0FF',
   inputBorder: '#957DAD',
   darkPurple: '#553C8B',
+  modalBg: '#0000004d',
 
   white: '#fff',
-  green: '#98DDCA',
+  green: '#5cb85c',
   info: '#0096FF',
   danger: '#C84361',
   gray: '#6D8299',

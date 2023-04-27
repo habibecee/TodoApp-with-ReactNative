@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Alert,
   SafeAreaView,
@@ -9,14 +9,30 @@ import {
 } from 'react-native';
 import Header from './src/components/header';
 import GeneralStyles from './src/utils/generalStyles';
-import Icon from 'react-native-vector-icons/AntDesign';
 import Input from './src/components/input';
 import {colors} from './src/utils/constants';
 import ToDo from './src/components/todo';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 function App() {
   const [text, setText] = useState('');
   const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    AsyncStorage.getItem('@todos')
+
+      .then(res => {
+        console.log(res);
+        if (res !== null) {
+          const parsedRes = JSON.parse(res);
+          setTodos(parsedRes);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
 
   const addTodo = () => {
     const newTodo = {
@@ -26,8 +42,14 @@ function App() {
       completed: false,
     };
 
-    setTodos([...todos, newTodo]);
-    setText('');
+    AsyncStorage.setItem('@todos', JSON.stringify([...todos, newTodo]))
+      .then(res => {
+        console.log('Item added', res);
+
+        setTodos([...todos, newTodo]);
+        setText('');
+      })
+      .catch(err => Alert.alert('Error', 'Error while adding item'));
   };
 
   return (
@@ -43,12 +65,18 @@ function App() {
         onIconPress={addTodo}
       />
       <View style={styles.todosWrapper}>
-        {todos.length === 0 ? (
+        {todos?.length === 0 ? (
           <Text style={styles.emptyText}> No goals here yet! </Text>
         ) : (
           <ScrollView style={styles.scrollView}>
             {todos?.map((todo, index) => (
-              <ToDo key={index} todo={todo} index={index + 1} />
+              <ToDo
+                todos={todos}
+                setTodos={setTodos}
+                key={index}
+                todo={todo}
+                index={index + 1}
+              />
             ))}
           </ScrollView>
         )}
