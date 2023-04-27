@@ -34,6 +34,11 @@ const styles = StyleSheet.create({
   icons: {
     // marginLeft: 10,
   },
+
+  completedTitle: {
+    color: colors.gray,
+    textDecorationLine: 'line-through',
+  },
 });
 
 export default styles;
