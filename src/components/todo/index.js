@@ -1,11 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, Alert} from 'react-native';
 import styles from './style';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {colors, fonts} from '../../utils/constants';
 import GeneralStyles from '../../utils/generalStyles';
+import EditModal from '../editModal';
 
 const ToDo = ({todo = {}, index, todos = [], setTodos = () => {}}) => {
+  const [openModal, setOpenModal] = useState(false);
+  const [willEditTodo, setWillEditTodo] = useState(todo.text);
+  const [hasError, setHasError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
   const deleteTodo = () => {
     Alert.alert('Delete', `Are you sure to delete "${todo?.text}"?`, [
       {
@@ -50,6 +56,32 @@ const ToDo = ({todo = {}, index, todos = [], setTodos = () => {}}) => {
     ]);
   };
 
+  const editTodo = () => {
+    // VALIDATION
+    if (willEditTodo === '') {
+      setHasError(true);
+      setErrorMessage('This field cannot be left blank!');
+      setTimeout(() => {
+        setHasError(false);
+        setErrorMessage('');
+      }, 4000);
+      return;
+    }
+
+    // EDIT PROCESS
+    const tempArray = [];
+    for (let i = 0; i < todos.length; i++) {
+      if (todos[i].id !== todo.id) {
+        tempArray.push(todos[i]);
+      } else {
+        const updatedTodo = {...todo, text: willEditTodo};
+        tempArray.push(updatedTodo);
+      }
+    }
+    setTodos(tempArray);
+    setOpenModal(false);
+  };
+
   return (
     <View
       style={[
@@ -79,7 +111,9 @@ const ToDo = ({todo = {}, index, todos = [], setTodos = () => {}}) => {
               size={25}
             />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.icons}>
+          <TouchableOpacity
+            style={styles.icons}
+            onPress={() => setOpenModal(true)}>
             <Icon name="pencil-sharp" color={colors.info} size={25} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.icons} onPress={deleteTodo}>
@@ -87,6 +121,15 @@ const ToDo = ({todo = {}, index, todos = [], setTodos = () => {}}) => {
           </TouchableOpacity>
         </View>
       </View>
+      <EditModal
+        willEditTodo={willEditTodo}
+        setWillEditTodo={setWillEditTodo}
+        visible={openModal}
+        closeModal={() => setOpenModal(false)}
+        onConfirm={editTodo}
+        hasError={hasError}
+        errorMessage={errorMessage}
+      />
     </View>
   );
 };

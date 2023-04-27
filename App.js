@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import Header from './src/components/header';
 import GeneralStyles from './src/utils/generalStyles';
-import Icon from 'react-native-vector-icons/AntDesign';
 import Input from './src/components/input';
 import {colors} from './src/utils/constants';
 import ToDo from './src/components/todo';
