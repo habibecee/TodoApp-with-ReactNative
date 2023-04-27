@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {colors, fonts} from '../../utils/constants';
 import GeneralStyles from '../../utils/generalStyles';
 import EditModal from '../editModal';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ToDo = ({todo = {}, index, todos = [], setTodos = () => {}}) => {
   const [openModal, setOpenModal] = useState(false);
@@ -23,7 +24,12 @@ const ToDo = ({todo = {}, index, todos = [], setTodos = () => {}}) => {
         text: 'Delete',
         onPress: () => {
           const filteredTodos = todos?.filter(item => item.id !== todo?.id);
-          setTodos(filteredTodos);
+          // setTodos(filteredTodos);
+          AsyncStorage.setItem('@todos', JSON.stringify(filteredTodos))
+            .then(res => {
+              setTodos(filteredTodos);
+            })
+            .catch(err => Alert.alert('Error', 'Error while deleting item'));
         },
         style: 'descructive',
       },
@@ -44,7 +50,12 @@ const ToDo = ({todo = {}, index, todos = [], setTodos = () => {}}) => {
               tempArray.push(newTodo);
             }
           }
-          setTodos(tempArray);
+          // setTodos(tempArray);
+          AsyncStorage.setItem('@todos', JSON.stringify(tempArray))
+            .then(res => {
+              setTodos(tempArray);
+            })
+            .catch(err => Alert.alert('Error', 'Error while changing status'));
         },
         style: 'default',
       },
@@ -78,7 +89,12 @@ const ToDo = ({todo = {}, index, todos = [], setTodos = () => {}}) => {
         tempArray.push(updatedTodo);
       }
     }
-    setTodos(tempArray);
+    // setTodos(tempArray);
+    AsyncStorage.setItem('@todos', JSON.stringify(tempArray))
+      .then(res => {
+        setTodos(tempArray);
+      })
+      .catch(err => Alert.alert('Error', 'Error while editing item'));
     setOpenModal(false);
   };
 
@@ -105,11 +121,11 @@ const ToDo = ({todo = {}, index, todos = [], setTodos = () => {}}) => {
         </View>
         <View style={styles.iconsWrapper}>
           <TouchableOpacity style={styles.icons} onPress={changeCompleted}>
-            <Icon
-              name={todo?.completed === true ? 'happy-sharp' : 'earth'}
-              color={todo?.completed === true ? colors.green : colors.gray}
-              size={25}
-            />
+            {todo?.completed === true ? (
+              <Icon name="happy-sharp" color={colors.gray} size={25} />
+            ) : (
+              <Icon name="earth" color={colors.gray} size={25} />
+            )}
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.icons}

@@ -10,7 +10,6 @@ const Input = ({
   hasIcon = false,
   iconName,
   color,
-  style,
   onIconPress = () => {},
   value = '',
   onChangeText = () => {},
@@ -27,7 +26,7 @@ const Input = ({
       />
       {hasIcon && (
         <TouchableOpacity onPress={onIconPress}>
-          <Icon name={iconName} color={color} style={[styles.icon, style]} />
+          <Icon name={iconName} color={color} style={styles.icon} />
         </TouchableOpacity>
       )}
     </View>
