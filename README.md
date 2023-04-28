@@ -25,12 +25,21 @@ Please stay tuned for more 😉 </br></br>
 
 <h4> You can download this app apk version and use your android phones. </br> For now, I don't publish Store 😐 </h4> </br>
 
+[APK FILE](/assets/apk/apk-release.apk)
+
 <h3> APP VIEW </h3> </br>
 
 ![](./assets/screen/screen.gif) </br>
-![](./assets/screen/scr1.png) </br>
-![](./assets/screen/scr2.png) </br>
-![](./assets/screen/scr3.png) </br>
-![](./assets/screen/scr4.png) </br>
-![](./assets/screen/scr5.png) </br>
-![](./assets/screen/scr6.png) </br>
+
+<img src="./assets/screen/scr1.png" width="250">
+<!-- </br> -->
+<img src="./assets/screen/scr2.png" width="250">
+<!-- </br> -->
+<img src="./assets/screen/scr3.png" width="250">
+<!-- </br> -->
+<img src="./assets/screen/scr4.png" width="250">
+<!-- </br> -->
+<img src="./assets/screen/scr5.png" width="250">
+<!-- </br> -->
+<img src="./assets/screen/scr6.png" width="250">
+<!-- </br> -->
