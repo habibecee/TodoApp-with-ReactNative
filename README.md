@@ -31,8 +31,8 @@ Please stay tuned for more 😉 </br></br>
 
 ![](./assets/screen/screen.gif) </br>
 
-|<img src="./assets/screen/scr1.png" width="300"> |<img src="./assets/screen/scr2.png" width="300"> |
+|<img src="./assets/screen/scr1.png" width="200"> |<img src="./assets/screen/scr2.png" width="200"> |
 
-|<img src="./assets/screen/scr3.png" width="300">|<img src="./assets/screen/scr4.png" width="300">|
+|<img src="./assets/screen/scr3.png" width="200">|<img src="./assets/screen/scr4.png" width="200">|
 
-|<img src="./assets/screen/scr5.png" width="300">|<img src="./assets/screen/scr6.png" width="300">|
+|<img src="./assets/screen/scr5.png" width="200">|<img src="./assets/screen/scr6.png" width="200">|
