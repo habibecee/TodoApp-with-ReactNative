@@ -35,6 +35,11 @@ function App() {
   }, []);
 
   const addTodo = () => {
+    if (text === '') {
+      Alert.alert('Error', 'This field cannot be left blank!');
+      return;
+    }
+
     const newTodo = {
       id: String(new Date().getTime()),
       text: text,
@@ -54,7 +59,7 @@ function App() {
 
   return (
     <SafeAreaView style={[GeneralStyles.flex1, GeneralStyles.bgWhite]}>
-      <Header title="My Todo App" />
+      <Header title="DOBARLAN BIRAKMA GENDİNİ!" />
       <Input
         color={colors.inputBorder}
         iconName="paw-sharp"
