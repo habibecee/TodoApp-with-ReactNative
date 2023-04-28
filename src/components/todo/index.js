@@ -110,7 +110,7 @@ const ToDo = ({todo = {}, index, todos = [], setTodos = () => {}}) => {
         <Text style={styles.title}>{index}</Text>
       </View>
       <View style={styles.todosWrapper}>
-        <View>
+        <View style={styles.todoTextWrapper}>
           <Text
             style={[styles.title, todo?.completed && styles.completedTitle]}>
             {todo?.text}
