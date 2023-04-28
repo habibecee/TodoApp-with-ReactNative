@@ -2,6 +2,10 @@ import {StyleSheet} from 'react-native';
 import {colors, fonts} from '../../utils/constants';
 
 const styles = StyleSheet.create({
+  todoTextWrapper: {
+    flex: 1,
+    paddingRight: 10,
+  },
   todo: {
     backgroundColor: colors.bgToDo,
     padding: 5,
